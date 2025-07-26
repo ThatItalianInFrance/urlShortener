@@ -1,5 +1,5 @@
 const mysql = require('mysql2');
-require('dotenv').config({ path: './.env.local' });
+require('dotenv').config({ path: './.env.local', quiet: true });
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -16,4 +16,18 @@ db.connect((err) => {
   console.log('Connected to database');
 });
 
-module.exports = db;
+// module.exports = db;
+
+module.exports = {
+  query: (sql, params) => {
+    return new Promise((resolve, reject) => {
+      db.query(sql, params, (err, results) => {
+        if (err) {
+          reject(err); // Handle errors
+        } else {
+          resolve(results); // Return results
+        }
+      });
+    });
+  }
+};

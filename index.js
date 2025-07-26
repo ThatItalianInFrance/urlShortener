@@ -4,7 +4,7 @@ const path = require('node:path');
 const { Eta } = require('eta');
 const urlRoutes = require('./routes/url.routes');
 
-require('dotenv').config({ path: './.env.local' });
+// require('dotenv').config({ quiet: true, path: './.env.local' });
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -32,12 +32,12 @@ function buildEtaEngine() {
     }
   };
 }
+app.use('/', urlRoutes);
 
 // Routes
 app.get('/', (req, res) => {
   res.render('index', { shortUrl: null, qrCodeDataUrl: null, error: null });
 });
-app.use('/', urlRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

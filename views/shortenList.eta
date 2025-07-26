@@ -1,0 +1,13 @@
+
+<table>
+
+  <% it.urls.forEach(url => { %>
+    <tr>
+      <td><%= url.id %></td>
+      <td><%= url.original_url %></td>
+      <td><%= url.short_code %></td>
+      <td><%= url.created_at %></td>
+      <td><%= url.clicks %></td>
+    </tr> 
+    <% }) %>
+  </table>
